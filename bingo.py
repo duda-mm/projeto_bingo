@@ -43,7 +43,6 @@ def sortear_numero(numeros_sorteados, ultimo_numero):
             numeros_sorteados.append(numero)
             return numero
         
-#código principal
 def iniciar_jogo(modo):
     jogadores = ['Jogador 1', 'Jogador 2', 'Jogador 3', 'Jogador 4']
     cartelas =[]
@@ -71,4 +70,25 @@ def iniciar_jogo(modo):
         numero_sorteado = sortear_numero(numeros_sorteados, intervalos[-1,1])
         print(f'\n🔔 Número sorteado: {numero_sorteado}')
         print(f'\n📜 Números sorteados até agora: {sorted(numeros_sorteados)}')
+        
         #marcar num nas cartelas
+        for cartela in cartelas:
+            marcar_numero(cartela, numero_sorteado)
+            exibir_cartela(cartela)
+            
+        #winners
+        vencedores = [cartela['jogador'] for cartela in cartelas if verificar_vitoria(cartela)]
+        if vencedores:
+            print('\n🎉 BINGO! Ganhador(es):',', '.join(vencedores))
+            return
+        
+#main program
+def main():
+    while True:
+        escolha = input('\nEscolha o modo de jogo\n0 - RÁPIDO\n1 - DEMORADO').strip()
+        if escolha in ['0','1']:
+            iniciar_jogo(int(escolha))
+            break
+        else:
+            print("Modo inválido! Digite '0' para rápido ou '1' para demorado.")
+main()
