@@ -47,6 +47,7 @@ def iniciar_jogo(modo):
     jogadores = ['Jogador 1', 'Jogador 2', 'Jogador 3', 'Jogador 4']
     cartelas =[]
     numeros_sorteados = []
+    
     #modo rápido
     if modo == 0:
         jogadores = jogadores[0:2] #dois players
@@ -67,6 +68,7 @@ def iniciar_jogo(modo):
         if resposta != 's':
             print('\n👋 Jogo encerrado! Até a próxima!')
             return
+
         numero_sorteado = sortear_numero(numeros_sorteados, intervalos[-1][1])
         print(f'\n🔔 Número sorteado: {numero_sorteado}')
         print(f'\n📜 Números sorteados até agora: {sorted(numeros_sorteados)}')
