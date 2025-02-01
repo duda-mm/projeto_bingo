@@ -3,8 +3,8 @@ import random
 #gerar a cartela
 def gerar_cartela(jogador, linhas, colunas, intervalos):
     cartela=[]
-    for _ in range(linhas):
-        linha = [random.choice(range(intervalos[i][0], intervalos[i][1]+1)) for i in range (colunas)]
+    for i in range(linhas):
+        linha = random.sample(range(intervalos[i][0], intervalos[i][1] + 1), colunas)
         cartela.append(linha)
     return{
         'jogador':jogador,
@@ -28,7 +28,7 @@ def verificar_vitoria(cartela):
     
 #exibir a cartela
 def exibir_cartela(cartela):
-    print(f'\n🃏 Cartela do jogador {cartela['jogador']}') #nome do jogador
+    print(f'\n🃏 Cartela do jogador {cartela["jogador"]}') 
     for linha in cartela["numeros"]:
         print(' '.join(
             f"[ {n:02} ]" if n in cartela['num_marcados'] else f" {n:02} "
@@ -67,7 +67,7 @@ def iniciar_jogo(modo):
         if resposta != 's':
             print('\n👋 Jogo encerrado! Até a próxima!')
             return
-        numero_sorteado = sortear_numero(numeros_sorteados, intervalos[-1,1])
+        numero_sorteado = sortear_numero(numeros_sorteados, intervalos[-1][1])
         print(f'\n🔔 Número sorteado: {numero_sorteado}')
         print(f'\n📜 Números sorteados até agora: {sorted(numeros_sorteados)}')
         
@@ -85,7 +85,8 @@ def iniciar_jogo(modo):
 #main program
 def main():
     while True:
-        escolha = input('\nEscolha o modo de jogo\n0 - RÁPIDO\n1 - DEMORADO').strip()
+        print('\nEscolha o modo de jogo:\n0 - RÁPIDO\n1 - DEMORADO')  # Print antes do input
+        escolha = input().strip()
         if escolha in ['0','1']:
             iniciar_jogo(int(escolha))
             break
